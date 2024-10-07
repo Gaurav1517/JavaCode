@@ -1,0 +1,10 @@
+pipeline{
+    agent any
+    stages{
+        stage('Git Checkout'){
+            steps{
+                git branch: 'main', credentialsId: 'mytoken', url: 'https://github.com/Gaurav1517/JavaCode.git'
+            }
+        }
+    }
+}
