@@ -1,10 +1,19 @@
 pipeline{
     agent any
+
+    environment{
+        PATH = "/opt/maven/bin:$PATH"
+    }
     stages{
         stage('Git Checkout'){
             steps{
                 //git branch: 'main', credentialsId: 'mytoken', url: 'https://github.com/Gaurav1517/JavaCode.git'
                 echo "Git Checkout from Github Jenkinsfile *Jenkins-Declarative-demo*"
+            }
+        }
+        stage("Maven Build"){
+            steps{
+                sh "mvn clean package"
             }
         }
     }
