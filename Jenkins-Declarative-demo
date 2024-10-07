@@ -3,7 +3,8 @@ pipeline{
     stages{
         stage('Git Checkout'){
             steps{
-                git branch: 'main', credentialsId: 'mytoken', url: 'https://github.com/Gaurav1517/JavaCode.git'
+                //git branch: 'main', credentialsId: 'mytoken', url: 'https://github.com/Gaurav1517/JavaCode.git'
+                echo "Git Checkout from Github Jenkinsfile *Jenkins-Declarative-demo*"
             }
         }
     }
