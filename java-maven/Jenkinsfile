@@ -18,7 +18,6 @@ pipeline {
                 label 'worker-1'
             }
             steps {
-                sh 'pwd'
                 unstash 'source'
                 sh 'pwd'
                 dir('/tmp/jenkins/workspace/workspace/stash-unstash/maven-java-app') {
