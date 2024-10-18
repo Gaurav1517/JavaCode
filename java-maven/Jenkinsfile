@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+    }
+    stages {
+        stage('Git Checkout') {
+            agent {
+                label 'master'
+            }
+            steps {
+                git branch: 'main', url: 'https://github.com/Gaurav1517/JavaCode.git'
+                stash includes: '**', name: 'source' // Stash all files
+            }
+        }
+        stage('Maven Build') {
+            agent {
+                label 'worker-1'
+            }
+            steps {
+                sh 'pwd'
+                unstash 'source'
+                sh 'pwd'
+                dir('/tmp/jenkins/workspace/workspace/stash-unstash/maven-java-app') {
+                    withEnv(["JAVA_HOME=/usr/lib/jvm/java-17-openjdk-17.0.6.0.9-0.3.ea.el8.x86_64", 
+                             "PATH=${env.JAVA_HOME}/bin:${env.PATH}"]) {
+                        sh 'java -version'  // Debug step
+                        sh 'mvn clean package'
+                    }
+                }
+            }
+        }
+    }
+}
